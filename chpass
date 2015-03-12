@@ -9,7 +9,7 @@ use Cpanel::ChangePasswd (); # cPanel API Interna
 
 # Global
 
-my $longitudpw = 12; # logitud de la contraseña
+my $longitudpw = 12; # longitud de la contraseña
 my @caracterespw = ("a".."z","A".."Z","0".."9"); # caracteres a incluir en las contraseñas al azar
 
 # Código principal
@@ -30,7 +30,7 @@ if ($user) {
         
         if ($status) {
         print "[+] Éxito: $msg\n";
-		    print "[+] Procesando cambio de contraseña\n";
+	print "[+] Procesando cambio de contraseña\n";
         print "[+] Usuario : $user\n";
         print "[+]  Clave  : $password\n\n";
         } else {
