@@ -1,0 +1,57 @@
+#!/usr/local/cpanel/3rdparty/perl/514/bin/perl
+
+use strict;
+use warnings;
+
+use lib '/usr/local/cpanel';
+
+use Cpanel::ChangePasswd (); # cPanel API Interna
+
+# Global
+
+my $longitudpw = 12; # logitud de la contraseña
+my @caracterespw = ("a".."z","A".."Z","0".."9"); # caracteres a incluir en las contraseñas al azar
+
+# Código principal
+
+my ($user, $password) = @ARGV;
+
+if ($user) {
+    if ($user eq 'root') { # si eres root
+        print "[-] ERROR! No podemos cambiar la contraseña root.\n";
+    } else {
+        unless ($password) { # si no nos dan una contraseña, inventamos una
+            print "[+] No has promorcionado una contraseña, inventaremos una.\n";
+            $password = randtext($longitudpw, @caracterespw);
+        }
+        
+        
+        my ($status, $msg) = Cpanel::ChangePasswd::change_password(user => $user, new_password => $password, optional_services => {mysql => 1});
+        
+        if ($status) {
+        print "[+] Éxito: $msg\n";
+		    print "[+] Procesando cambio de contraseña\n";
+        print "[+] Usuario : $user\n";
+        print "[+]  Clave  : $password\n\n";
+        } else {
+            print "[-] ERROR!: $msg\n";
+        }
+    }
+} else {
+    print "[-] ERROR! No has promorcionado un usuario válido.\n";
+    uso();
+}
+
+exit;
+
+# terminamos código principal
+
+sub uso {
+    print "[-] Uso: $0 usuario [contraseña]\n";
+    print "[-] La contraseña se genera aleatoriamente si se omite.\n";
+}
+
+sub randtext {
+    my $length = shift;
+    return join("",@_[map{rand @_} (1..$length)]); 
+}
