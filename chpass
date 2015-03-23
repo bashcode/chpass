@@ -29,7 +29,7 @@ if ($user) {
         my ($status, $msg) = Cpanel::ChangePasswd::change_password(user => $user, new_password => $password, optional_services => {mysql => 1});
         
         if ($status) {
-        print "[+] Éxito: $msg\n";
+        print "[+] Exito: $msg\n";
 	print "[+] Procesando cambio de contrasena\n";
         print "[+] Usuario : $user\n";
         print "[+]  Clave  : $password\n\n";
@@ -38,7 +38,7 @@ if ($user) {
         }
     }
 } else {
-    print "[-] ERROR! No has promorcionado un usuario valido.\n";
+    print "[-] ERROR! No has proporcionado un usuario valido.\n";
     uso();
 }
 
