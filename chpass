@@ -9,19 +9,19 @@ use Cpanel::ChangePasswd (); # cPanel API Interna
 
 # Global
 
-my $longitudpw = 12; # longitud de la contraseña
-my @caracterespw = ("a".."z","A".."Z","0".."9"); # caracteres a incluir en las contraseñas al azar
+my $longitudpw = 12; # longitud de la contrasena
+my @caracterespw = ("a".."z","A".."Z","0".."9"); # caracteres a incluir en las contrasenas al azar
 
-# Código principal
+# Codigo principal
 
 my ($user, $password) = @ARGV;
 
 if ($user) {
     if ($user eq 'root') { # si eres root
-        print "[-] ERROR! No podemos cambiar la contraseña root.\n";
+        print "[-] ERROR! No podemos cambiar la contrasena root.\n";
     } else {
-        unless ($password) { # si no nos dan una contraseña, inventamos una
-            print "[+] No has promorcionado una contraseña, inventaremos una.\n";
+        unless ($password) { # si no nos dan una contrasena, inventamos una
+            print "[+] No has promorcionado una contrasena, inventaremos una.\n";
             $password = randtext($longitudpw, @caracterespw);
         }
         
@@ -30,7 +30,7 @@ if ($user) {
         
         if ($status) {
         print "[+] Éxito: $msg\n";
-	print "[+] Procesando cambio de contraseña\n";
+	print "[+] Procesando cambio de contrasena\n";
         print "[+] Usuario : $user\n";
         print "[+]  Clave  : $password\n\n";
         } else {
@@ -38,17 +38,17 @@ if ($user) {
         }
     }
 } else {
-    print "[-] ERROR! No has promorcionado un usuario válido.\n";
+    print "[-] ERROR! No has promorcionado un usuario valido.\n";
     uso();
 }
 
 exit;
 
-# terminamos código principal
+# terminamos codigo principal
 
 sub uso {
-    print "[-] Uso: $0 usuario [contraseña]\n";
-    print "[-] La contraseña se genera aleatoriamente si se omite.\n";
+    print "[-] Uso: $0 usuario [contrasena]\n";
+    print "[-] La contrasena se genera aleatoriamente si se omite.\n";
 }
 
 sub randtext {
